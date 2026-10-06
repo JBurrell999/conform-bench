@@ -1,0 +1,38 @@
+# Copy this to engines.yaml and point entries at your own running engines.
+# `llm-conform run --config engines.yaml` reads this file.
+#
+# type must be one of: vllm, sglang, llamacpp, ollama, openai_compat
+# (openai_compat is the generic fallback for anything else that speaks the
+# OpenAI /v1/chat/completions contract).
+
+engines:
+  - name: ollama
+    type: ollama
+    base_url: http://localhost:11434
+    model: qwen2.5:1.5b
+    notes: Native /api/chat. No tool_choice support -- see README matrix notes.
+
+  - name: llama.cpp
+    type: llamacpp
+    base_url: http://localhost:8081
+    model: local
+    notes: Point this at a running `llama-server`. Tool-call support depends on the GGUF's chat template.
+
+  - name: vllm
+    type: vllm
+    base_url: http://localhost:8000
+    model: Qwen/Qwen2.5-1.5B-Instruct
+    notes: Requires --enable-auto-tool-choice --tool-call-parser <name> for tool tests to work at all.
+
+  - name: sglang
+    type: sglang
+    base_url: http://localhost:30000
+    model: Qwen/Qwen2.5-1.5B-Instruct
+    notes: Requires --tool-call-parser <name> for most open-weight models.
+
+  # Any other OpenAI-compatible server (LM Studio, TGI, a cloud endpoint, ...)
+  # - name: my-other-engine
+  #   type: openai_compat
+  #   base_url: http://localhost:1234
+  #   model: some-model-id
+  #   api_key: sk-...        # optional

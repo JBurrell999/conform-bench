@@ -1,0 +1,24 @@
+id: parallel_tool_calls
+description: >
+  Prompt naturally needs the same tool called twice with different arguments in
+  one turn. Parallel/multiple tool calls are a feature that varies a lot across
+  engines and server flags.
+difficulty: advanced
+tools:
+  - name: get_weather
+    description: Get the current weather for a city
+    parameters:
+      type: object
+      properties:
+        city: { type: string }
+      required: [city]
+      additionalProperties: false
+tool_choice: auto
+messages:
+  - role: user
+    content: "I'm deciding between two cities to visit. What's the weather in Rome and in Berlin?"
+expect:
+  calls_tool: true
+  tool_name_any_of: [get_weather]
+  min_calls: 2
+  max_calls: 2

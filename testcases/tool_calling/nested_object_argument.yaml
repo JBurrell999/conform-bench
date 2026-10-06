@@ -1,0 +1,33 @@
+id: nested_object_argument
+description: Tool parameter is itself an object with sub-fields
+difficulty: medium
+tools:
+  - name: create_contact
+    description: Create a new contact entry
+    parameters:
+      type: object
+      properties:
+        name: { type: string }
+        address:
+          type: object
+          properties:
+            city: { type: string }
+            zip: { type: string }
+          required: [city, zip]
+          additionalProperties: false
+      required: [name, address]
+      additionalProperties: false
+tool_choice: auto
+messages:
+  - role: user
+    content: "Add a new contact named Grace who lives in Austin, zip code 73301."
+expect:
+  calls_tool: true
+  tool_name: create_contact
+  args_checks:
+    - path: name
+      equals: Grace
+    - path: address.city
+      equals: Austin
+    - path: address.zip
+      equals: "73301"

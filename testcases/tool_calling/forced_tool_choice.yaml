@@ -1,0 +1,23 @@
+id: forced_tool_choice
+description: >
+  tool_choice forces a specific named tool even though the prompt alone wouldn't
+  obviously call for it. Native APIs without a tool_choice equivalent (e.g.
+  Ollama) are expected to fail this one -- that's a real, reportable gap, not a
+  harness bug.
+difficulty: medium
+tools:
+  - name: log_note
+    description: Save a free-form note to the user's log
+    parameters:
+      type: object
+      properties:
+        text: { type: string }
+      required: [text]
+      additionalProperties: false
+tool_choice: { name: log_note }
+messages:
+  - role: user
+    content: "Nice weather today."
+expect:
+  calls_tool: true
+  tool_name: log_note

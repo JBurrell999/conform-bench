@@ -1,0 +1,16 @@
+id: enum_field
+description: String field constrained to a fixed enum of allowed values
+difficulty: basic
+schema:
+  type: object
+  properties:
+    status: { type: string, enum: [pending, active, cancelled] }
+  required: [status]
+  additionalProperties: false
+prompt: |
+  An order has just been cancelled by the customer. Generate a JSON object recording
+  its status.
+  Respond with JSON only.
+checks:
+  - path: status
+    equals: cancelled

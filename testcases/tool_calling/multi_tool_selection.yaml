@@ -1,0 +1,33 @@
+id: multi_tool_selection
+description: Two similarly-named tools available; the model must pick the correct one
+difficulty: medium
+tools:
+  - name: get_current_weather
+    description: Get the current, real-time weather conditions for a city
+    parameters:
+      type: object
+      properties:
+        city: { type: string }
+      required: [city]
+      additionalProperties: false
+  - name: get_weather_forecast
+    description: Get a multi-day future weather forecast for a city
+    parameters:
+      type: object
+      properties:
+        city: { type: string }
+        days: { type: integer }
+      required: [city, days]
+      additionalProperties: false
+tool_choice: auto
+messages:
+  - role: user
+    content: "Give me the 5-day weather forecast for Tokyo."
+expect:
+  calls_tool: true
+  tool_name: get_weather_forecast
+  args_checks:
+    - path: city
+      equals: Tokyo
+    - path: days
+      equals: 5

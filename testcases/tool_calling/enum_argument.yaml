@@ -1,0 +1,22 @@
+id: enum_argument
+description: Tool parameter constrained to an enum; checks the model selects the exact matching value
+difficulty: basic
+tools:
+  - name: set_thermostat_mode
+    description: Set the home thermostat's operating mode
+    parameters:
+      type: object
+      properties:
+        mode: { type: string, enum: [heat, cool, off] }
+      required: [mode]
+      additionalProperties: false
+tool_choice: auto
+messages:
+  - role: user
+    content: "It's freezing in here, turn the heat on."
+expect:
+  calls_tool: true
+  tool_name: set_thermostat_mode
+  args_checks:
+    - path: mode
+      equals: heat

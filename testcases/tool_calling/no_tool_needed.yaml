@@ -1,0 +1,18 @@
+id: no_tool_needed
+description: Prompt doesn't need any tool; the model should just answer directly
+difficulty: basic
+tools:
+  - name: get_weather
+    description: Get the current weather for a city
+    parameters:
+      type: object
+      properties:
+        city: { type: string }
+      required: [city]
+      additionalProperties: false
+tool_choice: auto
+messages:
+  - role: user
+    content: "What is 2 + 2? Just answer in words, no tool needed."
+expect:
+  calls_tool: false

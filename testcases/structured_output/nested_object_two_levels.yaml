@@ -1,0 +1,32 @@
+id: nested_object_two_levels
+description: Object nested two levels deep, with required fields at each level
+difficulty: medium
+schema:
+  type: object
+  properties:
+    user:
+      type: object
+      properties:
+        name: { type: string }
+        address:
+          type: object
+          properties:
+            city: { type: string }
+            country: { type: string }
+          required: [city, country]
+          additionalProperties: false
+      required: [name, address]
+      additionalProperties: false
+  required: [user]
+  additionalProperties: false
+prompt: |
+  Generate a JSON object describing a user named Marcus who lives in the city of
+  Lagos, Nigeria.
+  Respond with JSON only.
+checks:
+  - path: user.name
+    equals: Marcus
+  - path: user.address.city
+    equals: Lagos
+  - path: user.address.country
+    equals: Nigeria

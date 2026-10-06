@@ -1,0 +1,17 @@
+id: pattern_regex_field
+description: String field constrained by a regex pattern (5-digit zip code)
+difficulty: advanced
+schema:
+  type: object
+  properties:
+    zip_code:
+      type: string
+      pattern: "^[0-9]{5}$"
+  required: [zip_code]
+  additionalProperties: false
+prompt: |
+  Generate a JSON object with a US zip code of 94107.
+  Respond with JSON only.
+checks:
+  - path: zip_code
+    equals: "94107"

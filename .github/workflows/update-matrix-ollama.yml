@@ -1,0 +1,80 @@
+name: Update matrix (Ollama)
+
+# Ollama is the one engine in the matrix that runs comfortably CPU-only, so
+# it's the one we can afford to actually re-run on a plain GitHub-hosted
+# runner. vLLM/SGLang need a GPU -- see CONTRIBUTING.md for how to
+# contribute those results from a machine that has one; llama.cpp is
+# exercised locally by maintainers (see README) rather than in CI, since
+# building it from source on every run would dominate the job's runtime.
+#
+# This opens a PR rather than pushing straight to main, so a real engine
+# regression (or a flaky model response) gets a human look before it lands.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # every Monday at 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-ollama-results:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install llm-conform
+        run: pip install -e .
+
+      - name: Install Ollama
+        run: curl -fsSL https://ollama.com/install.sh | sh
+
+      - name: Start Ollama server
+        run: |
+          ollama serve &
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:11434/api/version && break
+            sleep 1
+          done
+
+      - name: Pull model
+        run: ollama pull qwen2.5:1.5b
+
+      - name: Write engine config
+        run: |
+          cat > engines.ci.yaml <<EOF
+          engines:
+            - name: ollama
+              type: ollama
+              base_url: http://localhost:11434
+              model: qwen2.5:1.5b
+          EOF
+
+      - name: Run conformance suite
+        run: llm-conform run --config engines.ci.yaml --latest
+
+      - name: Update README matrix
+        run: llm-conform report results/*-latest.json --update-readme README.md
+
+      - name: Open PR with updated results
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Update Ollama conformance results (scheduled run)"
+          title: "Update Ollama conformance matrix"
+          body: |
+            Automated re-run of the conformance suite against Ollama
+            (model: `qwen2.5:1.5b`). Please review the diff in
+            `results/ollama-latest.json` and the README matrix before
+            merging -- a real behavior regression and a one-off flaky
+            model response look the same in this diff.
+          branch: update-ollama-matrix
+          add-paths: |
+            results/ollama-latest.json
+            README.md

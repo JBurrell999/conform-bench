@@ -1,0 +1,18 @@
+id: flat_object_basic
+description: Flat object, two required fields, additionalProperties false
+difficulty: basic
+schema:
+  type: object
+  properties:
+    name: { type: string }
+    age: { type: integer }
+  required: [name, age]
+  additionalProperties: false
+prompt: |
+  Generate a JSON object describing a fictional person named Priya who is 29 years old.
+  Respond with JSON only, matching this shape: {"name": string, "age": integer}.
+checks:
+  - path: name
+    equals: Priya
+  - path: age
+    equals: 29

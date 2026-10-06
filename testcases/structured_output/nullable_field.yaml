@@ -1,0 +1,20 @@
+id: nullable_field
+description: Field that is explicitly nullable (type [string, "null"]) rather than omitted
+difficulty: medium
+schema:
+  type: object
+  properties:
+    name: { type: string }
+    middle_name:
+      type: [string, "null"]
+  required: [name, middle_name]
+  additionalProperties: false
+prompt: |
+  Generate a JSON object for a person named Alex who has no middle name. Use a JSON
+  null for the missing middle name field -- don't omit the field.
+  Respond with JSON only.
+checks:
+  - path: name
+    equals: Alex
+  - path: middle_name
+    equals: null

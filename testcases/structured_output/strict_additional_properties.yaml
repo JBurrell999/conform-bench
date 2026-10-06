@@ -1,0 +1,23 @@
+id: strict_additional_properties
+description: >
+  additionalProperties: false, paired with a prompt that invites extra detail --
+  tests whether the engine's constrained decoding actually enforces "no extra
+  keys" rather than just the model loosely following instructions.
+difficulty: advanced
+schema:
+  type: object
+  properties:
+    city: { type: string }
+    population: { type: integer }
+  required: [city, population]
+  additionalProperties: false
+prompt: |
+  Describe the city of Nairobi, Kenya, which has a population of about 4397073.
+  Include as much interesting detail as you can about its history, climate, and
+  culture.
+  Respond with JSON only, using exactly the fields requested and no others.
+checks:
+  - path: city
+    equals: Nairobi
+  - path: population
+    equals: 4397073

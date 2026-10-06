@@ -1,0 +1,26 @@
+id: array_argument
+description: Tool parameter is an array of strings
+difficulty: medium
+tools:
+  - name: tag_ticket
+    description: Attach one or more tags to a support ticket
+    parameters:
+      type: object
+      properties:
+        tags:
+          type: array
+          items: { type: string }
+      required: [tags]
+      additionalProperties: false
+tool_choice: auto
+messages:
+  - role: user
+    content: 'Tag this support ticket with both "billing" and "urgent".'
+expect:
+  calls_tool: true
+  tool_name: tag_ticket
+  args_checks:
+    - path: tags.0
+      equals: billing
+    - path: tags.1
+      equals: urgent

@@ -1,0 +1,30 @@
+id: recursive_tree_schema
+description: >
+  Recursive schema via $defs/$ref (a self-referencing category tree node) --
+  schema-to-grammar compilers (outlines, xgrammar, GBNF translation, etc.)
+  historically vary a lot in whether they support self-referencing $ref at all.
+difficulty: advanced
+schema:
+  "$defs":
+    node:
+      type: object
+      properties:
+        name: { type: string }
+        children:
+          type: array
+          items: { "$ref": "#/$defs/node" }
+      required: [name, children]
+      additionalProperties: false
+  "$ref": "#/$defs/node"
+prompt: |
+  Generate a JSON object describing a category tree whose root category is named
+  "Electronics" and has exactly one child category named "Laptops", which itself
+  has no further children (an empty children array).
+  Respond with JSON only.
+checks:
+  - path: name
+    equals: Electronics
+  - path: children.0.name
+    equals: Laptops
+  - path: children.0.children
+    equals: []

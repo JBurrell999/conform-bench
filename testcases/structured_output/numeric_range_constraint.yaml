@@ -1,0 +1,16 @@
+id: numeric_range_constraint
+description: Integer field constrained by minimum and maximum (a 1-5 rating)
+difficulty: basic
+schema:
+  type: object
+  properties:
+    rating: { type: integer, minimum: 1, maximum: 5 }
+  required: [rating]
+  additionalProperties: false
+prompt: |
+  A reviewer gave a restaurant a perfect score of 5 out of 5. Generate a JSON object
+  recording the rating.
+  Respond with JSON only.
+checks:
+  - path: rating
+    equals: 5

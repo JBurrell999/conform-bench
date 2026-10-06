@@ -1,0 +1,31 @@
+id: array_of_objects
+description: Array of objects, each with its own required fields, minItems enforced
+difficulty: medium
+schema:
+  type: object
+  properties:
+    books:
+      type: array
+      minItems: 2
+      items:
+        type: object
+        properties:
+          title: { type: string }
+          year: { type: integer }
+        required: [title, year]
+        additionalProperties: false
+  required: [books]
+  additionalProperties: false
+prompt: |
+  Generate a JSON object listing exactly two books: "Dune" published in 1965, and
+  "Neuromancer" published in 1984.
+  Respond with JSON only.
+checks:
+  - path: books.0.title
+    equals: Dune
+  - path: books.0.year
+    equals: 1965
+  - path: books.1.title
+    equals: Neuromancer
+  - path: books.1.year
+    equals: 1984
