@@ -1,4 +1,4 @@
-"""Unit tests for llm_conform.validators: given a hand-built RawResponse,
+"""Unit tests for conform_bench.validators: given a hand-built RawResponse,
 does the verdict match what a human would call correct?
 """
 
@@ -8,7 +8,7 @@ import json
 
 import pytest
 
-from llm_conform.models import (
+from conform_bench.models import (
     FieldCheck,
     Outcome,
     RawResponse,
@@ -16,7 +16,7 @@ from llm_conform.models import (
     ToolSpec,
     ToolTestCase,
 )
-from llm_conform.validators import strip_markdown_fence, validate_structured_response, validate_tool_response
+from conform_bench.validators import strip_markdown_fence, validate_structured_response, validate_tool_response
 
 SCHEMA = {
     "type": "object",

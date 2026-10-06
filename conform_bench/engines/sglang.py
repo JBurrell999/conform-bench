@@ -9,7 +9,7 @@ mirroring vLLM's gotcha -- omit it and `tool_choice` is a no-op.
 
 from __future__ import annotations
 
-from llm_conform.engines.openai_compat import OpenAICompatAdapter
+from conform_bench.engines.openai_compat import OpenAICompatAdapter
 
 
 class SGLangAdapter(OpenAICompatAdapter):

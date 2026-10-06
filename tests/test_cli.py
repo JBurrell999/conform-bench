@@ -1,4 +1,4 @@
-"""Smoke tests for the `llm-conform` CLI subcommands, driven in-process via
+"""Smoke tests for the `conform-bench` CLI subcommands, driven in-process via
 `main(argv)` rather than subprocess -- fast, and still exercises the real
 argparse wiring."""
 
@@ -9,8 +9,8 @@ from pathlib import Path
 
 import yaml
 
-from llm_conform.cli import main
-from llm_conform.mock_server import MockEngineServer
+from conform_bench.cli import main
+from conform_bench.mock_server import MockEngineServer
 
 
 def test_list_tests_runs_cleanly(capsys):
@@ -101,7 +101,7 @@ def test_report_prints_matrix_to_stdout(tmp_path: Path, capsys):
 
 
 def test_report_update_readme(tmp_path: Path):
-    from llm_conform.report import MATRIX_END, MATRIX_START
+    from conform_bench.report import MATRIX_END, MATRIX_START
 
     readme = tmp_path / "README.md"
     readme.write_text(f"# Title\n\n{MATRIX_START}\nold\n{MATRIX_END}\n")

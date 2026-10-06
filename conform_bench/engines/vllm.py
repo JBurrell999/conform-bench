@@ -14,7 +14,7 @@ engine bug. See README's matrix notes for per-model parser names.
 
 from __future__ import annotations
 
-from llm_conform.engines.openai_compat import OpenAICompatAdapter
+from conform_bench.engines.openai_compat import OpenAICompatAdapter
 
 
 class VLLMAdapter(OpenAICompatAdapter):

@@ -1,4 +1,4 @@
-"""Command-line entry point: `llm-conform <subcommand> ...`.
+"""Command-line entry point: `conform-bench <subcommand> ...`.
 
 Subcommands:
   run          Run the test suite against one or more configured engines.
@@ -14,10 +14,10 @@ import json
 import sys
 from pathlib import Path
 
-from llm_conform.config import load_engine_configs
-from llm_conform.report import build_full_matrix_markdown, load_reports, update_readme
-from llm_conform.runner import run_many
-from llm_conform.testcase_loader import load_structured_tests, load_tool_tests
+from conform_bench.config import load_engine_configs
+from conform_bench.report import build_full_matrix_markdown, load_reports, update_readme
+from conform_bench.runner import run_many
+from conform_bench.testcase_loader import load_structured_tests, load_tool_tests
 
 
 def _cmd_run(args: argparse.Namespace) -> int:
@@ -83,7 +83,7 @@ def _cmd_list_tests(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="llm-conform")
+    parser = argparse.ArgumentParser(prog="conform-bench")
     sub = parser.add_subparsers(dest="command", required=True)
 
     run_p = sub.add_parser("run", help="run the suite against configured engines")
@@ -104,7 +104,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--latest",
         action="store_true",
         help="also write results/<engine>-latest.json (one level above --output-dir) -- "
-        "these are the files `llm-conform report` and the README matrix are meant to track in git",
+        "these are the files `conform-bench report` and the README matrix are meant to track in git",
     )
     run_p.add_argument(
         "--parallel", action="store_true", help="run each engine's suite concurrently"

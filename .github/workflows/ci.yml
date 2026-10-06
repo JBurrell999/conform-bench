@@ -23,7 +23,7 @@ jobs:
         run: pip install -e ".[dev]"
 
       - name: Test
-        run: pytest --cov=llm_conform --cov-report=term-missing
+        run: pytest --cov=conform_bench --cov-report=term-missing
 
       - name: Sanity-check the test catalog loads cleanly
-        run: llm-conform list-tests
+        run: conform-bench list-tests

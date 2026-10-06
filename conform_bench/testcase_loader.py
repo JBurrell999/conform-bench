@@ -17,7 +17,7 @@ from typing import Any
 
 import yaml
 
-from llm_conform.models import FieldCheck, StructuredTestCase, ToolSpec, ToolTestCase
+from conform_bench.models import FieldCheck, StructuredTestCase, ToolSpec, ToolTestCase
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_TESTCASES_DIR = REPO_ROOT / "testcases"

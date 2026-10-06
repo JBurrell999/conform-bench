@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 
 import httpx
 
-from llm_conform.models import EngineConfig, RawResponse, StructuredTestCase, ToolTestCase
+from conform_bench.models import EngineConfig, RawResponse, StructuredTestCase, ToolTestCase
 
 
 class EngineAdapter(ABC):

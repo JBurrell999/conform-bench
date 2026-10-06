@@ -1,6 +1,6 @@
 """The most important regression test in this repo: for every real test
 case under testcases/, synthesize the response a perfectly-conformant
-engine *would* give (using llm_conform.synth, which reads the test's own
+engine *would* give (using conform_bench.synth, which reads the test's own
 schema/tools/checks -- not an LLM), feed it through the real adapter and
 validator code paths via httpx.MockTransport, and assert the result is
 PASS.
@@ -18,12 +18,12 @@ import json
 import httpx
 import pytest
 
-from llm_conform.engines.ollama import OllamaAdapter
-from llm_conform.engines.openai_compat import OpenAICompatAdapter
-from llm_conform.models import EngineConfig, Outcome
-from llm_conform.synth import hints_from_checks, synthesize_value
-from llm_conform.testcase_loader import load_structured_tests, load_tool_tests
-from llm_conform.validators import validate_structured_response, validate_tool_response
+from conform_bench.engines.ollama import OllamaAdapter
+from conform_bench.engines.openai_compat import OpenAICompatAdapter
+from conform_bench.models import EngineConfig, Outcome
+from conform_bench.synth import hints_from_checks, synthesize_value
+from conform_bench.testcase_loader import load_structured_tests, load_tool_tests
+from conform_bench.validators import validate_structured_response, validate_tool_response
 
 STRUCTURED_TESTS = load_structured_tests()
 TOOL_TESTS = load_tool_tests()

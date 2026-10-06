@@ -6,7 +6,7 @@ UNSUPPORTEDs without needing a GPU or a real model.
 
 Run standalone:
 
-    python -m llm_conform.mock_server --port 8800 --behavior schema_violator
+    python -m conform_bench.mock_server --port 8800 --behavior schema_violator
 
 Then point an `engines.yaml` entry of type `openai_compat` (or `ollama`, for
 the native endpoint) at `http://127.0.0.1:8800` and run the suite against
@@ -33,7 +33,7 @@ import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 
-from llm_conform.synth import synthesize_value
+from conform_bench.synth import synthesize_value
 
 DEFAULT_BEHAVIOR = "conformant"
 BEHAVIORS = {
@@ -101,7 +101,7 @@ def _chat_content_and_calls(body: dict[str, Any], behavior: str) -> tuple[int, s
             text = f"```json\n{text}\n```"
         return 200, text, None
 
-    return 200, "Hello from the llm-conform mock server.", None
+    return 200, "Hello from the conform-bench mock server.", None
 
 
 def make_handler(behavior: str) -> type[BaseHTTPRequestHandler]:
@@ -221,7 +221,7 @@ def main() -> None:
     args = parser.parse_args()
 
     httpd = ThreadingHTTPServer((args.host, args.port), make_handler(args.behavior))
-    print(f"llm-conform mock server listening on http://{args.host}:{args.port} (behavior={args.behavior})")
+    print(f"conform-bench mock server listening on http://{args.host}:{args.port} (behavior={args.behavior})")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

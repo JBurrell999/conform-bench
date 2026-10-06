@@ -13,8 +13,8 @@ from typing import Any
 
 import httpx
 
-from llm_conform.engines.base import EngineAdapter
-from llm_conform.models import RawResponse, StructuredTestCase, ToolTestCase
+from conform_bench.engines.base import EngineAdapter
+from conform_bench.models import RawResponse, StructuredTestCase, ToolTestCase
 
 
 class OpenAICompatAdapter(EngineAdapter):

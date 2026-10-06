@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "llm-conform"
+name = "conform-bench"
 version = "0.1.0"
 description = "A conformance test suite for JSON-schema-constrained output and tool-call parsing across LLM serving engines (vLLM, SGLang, llama.cpp, Ollama)."
 readme = "README.md"
@@ -23,10 +23,10 @@ dev = [
 ]
 
 [project.scripts]
-llm-conform = "llm_conform.cli:main"
+conform-bench = "conform_bench.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["llm_conform*"]
+include = ["conform_bench*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

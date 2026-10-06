@@ -6,9 +6,9 @@ import datetime
 from concurrent.futures import ThreadPoolExecutor
 from typing import Iterable
 
-from llm_conform import __version__
-from llm_conform.engines import get_adapter_class
-from llm_conform.models import (
+from conform_bench import __version__
+from conform_bench.engines import get_adapter_class
+from conform_bench.models import (
     Category,
     EngineConfig,
     RawResponse,
@@ -18,8 +18,8 @@ from llm_conform.models import (
     TestResult,
     ToolTestCase,
 )
-from llm_conform.testcase_loader import load_structured_tests, load_tool_tests
-from llm_conform.validators import Verdict, validate_structured_response, validate_tool_response
+from conform_bench.testcase_loader import load_structured_tests, load_tool_tests
+from conform_bench.validators import Verdict, validate_structured_response, validate_tool_response
 
 
 def run_engine(

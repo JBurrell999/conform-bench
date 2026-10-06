@@ -9,7 +9,7 @@ from pathlib import Path
 
 import yaml
 
-from llm_conform.models import EngineConfig
+from conform_bench.models import EngineConfig
 
 
 def load_engine_configs(path: str | Path) -> list[EngineConfig]:

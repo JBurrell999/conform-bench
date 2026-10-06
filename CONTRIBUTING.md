@@ -22,7 +22,7 @@ pytest
 ```
 
 All tests run offline against either `httpx.MockTransport` or the built-in
-`llm_conform.mock_server` -- no GPU, API key, or real engine required to
+`conform_bench.mock_server` -- no GPU, API key, or real engine required to
 contribute.
 
 ## Adding a test case
@@ -93,13 +93,13 @@ designed."
 ## Adding an engine adapter
 
 Most engines just speak OpenAI's `/v1/chat/completions` -- subclass
-`llm_conform.engines.openai_compat.OpenAICompatAdapter` and override
+`conform_bench.engines.openai_compat.OpenAICompatAdapter` and override
 `get_version()` and, if needed, `_structured_payload_extra`/
 `_tools_payload_extra` for quirks. If the engine has its own native wire
-format (like Ollama), implement `llm_conform.engines.base.EngineAdapter`
-directly -- see `llm_conform/engines/ollama.py`.
+format (like Ollama), implement `conform_bench.engines.base.EngineAdapter`
+directly -- see `conform_bench/engines/ollama.py`.
 
-Register it in `llm_conform/engines/__init__.py`'s `ADAPTERS` dict, add a
+Register it in `conform_bench/engines/__init__.py`'s `ADAPTERS` dict, add a
 sample entry to `engines.example.yaml`, and add unit tests mirroring
 `tests/test_engines.py` (payload shape via `httpx.MockTransport` -- no real
 server needed).
@@ -108,8 +108,8 @@ server needed).
 
 ```bash
 cp engines.example.yaml engines.yaml   # edit base_url/model for your setup
-llm-conform run --config engines.yaml --latest
-llm-conform report results/*-latest.json --update-readme README.md
+conform-bench run --config engines.yaml --latest
+conform-bench report results/*-latest.json --update-readme README.md
 ```
 
 Commit the updated `results/<engine>-latest.json` and `README.md` together.

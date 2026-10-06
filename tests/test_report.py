@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from llm_conform.report import (
+from conform_bench.report import (
     MATRIX_END,
     MATRIX_START,
     build_full_matrix_markdown,

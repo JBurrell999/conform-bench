@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from llm_conform.testcase_loader import load_structured_tests, load_tool_tests
+from conform_bench.testcase_loader import load_structured_tests, load_tool_tests
 
 OUTCOME_SYMBOL = {
     "pass": "✅",
@@ -26,8 +26,8 @@ LEGEND = (
     "⏱️ timeout &nbsp;·&nbsp; *(blank)* not run"
 )
 
-MATRIX_START = "<!-- LLM-CONFORM:MATRIX:START -->"
-MATRIX_END = "<!-- LLM-CONFORM:MATRIX:END -->"
+MATRIX_START = "<!-- CONFORM-BENCH:MATRIX:START -->"
+MATRIX_END = "<!-- CONFORM-BENCH:MATRIX:END -->"
 
 
 def load_reports(paths: list[Path]) -> list[dict[str, Any]]:

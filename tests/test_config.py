@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from llm_conform.config import load_engine_configs
+from conform_bench.config import load_engine_configs
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 

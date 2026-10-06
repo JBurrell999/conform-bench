@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from llm_conform.testcase_loader import load_structured_tests, load_tool_tests
+from conform_bench.testcase_loader import load_structured_tests, load_tool_tests
 
 
 def test_loads_all_structured_fixtures():

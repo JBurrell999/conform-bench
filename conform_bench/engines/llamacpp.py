@@ -12,7 +12,7 @@ means the chat template doesn't support tools for this model.
 
 from __future__ import annotations
 
-from llm_conform.engines.openai_compat import OpenAICompatAdapter
+from conform_bench.engines.openai_compat import OpenAICompatAdapter
 
 
 class LlamaCppAdapter(OpenAICompatAdapter):

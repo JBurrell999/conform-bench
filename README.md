@@ -1,7 +1,7 @@
-# llm-conform
+# conform-bench
 
 **Does JSON-schema-constrained output and tool-call parsing actually work on
-your engine?** `llm-conform` is a conformance test suite that runs the same
+your engine?** `conform-bench` is a conformance test suite that runs the same
 battery of structured-output and tool-calling tests against vLLM, SGLang,
 llama.cpp, Ollama (or anything else that speaks a compatible API), and
 publishes a compatibility matrix from the results.
@@ -14,7 +14,7 @@ server flag, parallel tool calls that only one engine actually supports.
 This project exists to turn "I think X broke in version Y" into a
 reproducible test and a line in a table.
 
-<!-- LLM-CONFORM:MATRIX:START -->
+<!-- CONFORM-BENCH:MATRIX:START -->
 ### Summary
 
 | Engine | Version | Model | Structured Output | Tool Calling | Tested |
@@ -71,9 +71,9 @@ reproducible test and a line in a table.
 </details>
 
 </details>
-<!-- LLM-CONFORM:MATRIX:END -->
+<!-- CONFORM-BENCH:MATRIX:END -->
 
-*(Run `llm-conform report results/*-latest.json --update-readme README.md`
+*(Run `conform-bench report results/*-latest.json --update-readme README.md`
 to regenerate the table above from `results/*-latest.json`. An engine with
 no row yet (vLLM, SGLang) hasn't been run in this environment -- see
 [Known gaps / what isn't tested here](#known-gaps--what-isnt-tested-here).)*
@@ -81,12 +81,12 @@ no row yet (vLLM, SGLang) hasn't been run in this environment -- see
 ## Quickstart
 
 ```bash
-git clone <this repo> && cd llm-conform
+git clone <this repo> && cd conform-bench
 python3 -m venv .venv && source .venv/bin/activate
 pip install -e .
 
 # Try it against the built-in fake engine first -- no GPU or model needed.
-python -m llm_conform.mock_server --port 8800 --behavior schema_violator &
+python -m conform_bench.mock_server --port 8800 --behavior schema_violator &
 cat > engines.yaml <<EOF
 engines:
   - name: demo
@@ -94,7 +94,7 @@ engines:
     base_url: http://localhost:8800
     model: mock
 EOF
-llm-conform run --config engines.yaml
+conform-bench run --config engines.yaml
 ```
 
 You should see a handful of `fail`s -- that behavior deliberately breaks
@@ -104,8 +104,8 @@ Then point it at a real engine:
 
 ```bash
 cp engines.example.yaml engines.yaml   # edit base_url / model for your setup
-llm-conform run --config engines.yaml --latest
-llm-conform report results/*-latest.json --update-readme README.md
+conform-bench run --config engines.yaml --latest
+conform-bench report results/*-latest.json --update-readme README.md
 ```
 
 ## What it actually checks
@@ -127,7 +127,7 @@ that parse as JSON and conform to that tool's own parameter schema,
 honoring (or, if unsupported, honestly failing) a forced `tool_choice`, and
 parallel/multiple tool calls in one turn.
 
-Run `llm-conform list-tests` for the full, current catalog with
+Run `conform-bench list-tests` for the full, current catalog with
 descriptions.
 
 Every outcome is one of:
@@ -156,19 +156,19 @@ engines.yaml --config--> EngineConfig --+--> EngineAdapter (vllm/sglang/llamacpp
                                    TestResult --> results/*.json --> report.py --> README matrix
 ```
 
-- **`llm_conform/engines/`** -- one adapter per engine. vLLM, SGLang, and
+- **`conform_bench/engines/`** -- one adapter per engine. vLLM, SGLang, and
   llama.cpp all subclass `OpenAICompatAdapter` (they share the
   `/v1/chat/completions` contract); Ollama gets its own adapter for its
   native `/api/chat` wire format. Adding a new OpenAI-compatible engine is
   usually a ~15-line subclass -- see [CONTRIBUTING.md](CONTRIBUTING.md).
-- **`llm_conform/validators.py`** -- the only place that decides pass/fail.
+- **`conform_bench/validators.py`** -- the only place that decides pass/fail.
   It never trusts "the engine said 200 OK"; it always re-parses and
   re-validates the actual content against the test's schema/checks.
-- **`llm_conform/mock_server.py`** -- a dependency-free fake engine (stdlib
+- **`conform_bench/mock_server.py`** -- a dependency-free fake engine (stdlib
   `http.server`) with pluggable misbehavior presets (`schema_violator`,
   `malformed_tool_args`, `http_400`, ...). Used by the test suite and as a
   zero-setup way to try the CLI.
-- **`llm_conform/synth.py`** -- generates a schema-conforming value from a
+- **`conform_bench/synth.py`** -- generates a schema-conforming value from a
   JSON Schema. Used only to test the harness against itself (see
   `tests/test_runner_integration.py`); it never judges a real engine's
   output -- that's always `jsonschema` via `validators.py`.
@@ -201,7 +201,7 @@ engines.yaml --config--> EngineConfig --+--> EngineAdapter (vllm/sglang/llamacpp
 ## Project layout
 
 ```
-llm_conform/            the harness (installable package, `llm-conform` CLI)
+conform_bench/            the harness (installable package, `conform-bench` CLI)
 testcases/              the test catalog (YAML, one file per test case)
 tests/                  pytest suite -- runs fully offline
 results/                committed *-latest.json per engine (matrix source of truth)

@@ -5,16 +5,16 @@ handling, real (de)serialization, thread-based parallel execution).
 
 Uses simple, `checks`-free fixture test cases rather than the real catalog
 under testcases/: the mock server's generic synthesis only knows how to be
-schema-valid, not factually correct (see llm_conform/synth.py), so it can't
+schema-valid, not factually correct (see conform_bench/synth.py), so it can't
 satisfy the real catalog's exact-value checks. That full-catalog
 self-consistency check already lives in test_runner_integration.py.
 """
 
 from __future__ import annotations
 
-from llm_conform.mock_server import MockEngineServer
-from llm_conform.models import Category, EngineConfig, Outcome, StructuredTestCase, ToolSpec, ToolTestCase
-from llm_conform.runner import run_engine, run_many
+from conform_bench.mock_server import MockEngineServer
+from conform_bench.models import Category, EngineConfig, Outcome, StructuredTestCase, ToolSpec, ToolTestCase
+from conform_bench.runner import run_engine, run_many
 
 STRUCTURED = [
     StructuredTestCase(

@@ -7,9 +7,9 @@ from __future__ import annotations
 import jsonschema
 import pytest
 
-from llm_conform.synth import hints_from_checks, synthesize_value
-from llm_conform.testcase_loader import load_structured_tests, load_tool_tests
-from llm_conform.validators import run_field_checks
+from conform_bench.synth import hints_from_checks, synthesize_value
+from conform_bench.testcase_loader import load_structured_tests, load_tool_tests
+from conform_bench.validators import run_field_checks
 
 
 @pytest.mark.parametrize("test", load_structured_tests(), ids=lambda t: t.id)

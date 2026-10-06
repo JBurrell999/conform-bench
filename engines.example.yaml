@@ -1,5 +1,5 @@
 # Copy this to engines.yaml and point entries at your own running engines.
-# `llm-conform run --config engines.yaml` reads this file.
+# `conform-bench run --config engines.yaml` reads this file.
 #
 # type must be one of: vllm, sglang, llamacpp, ollama, openai_compat
 # (openai_compat is the generic fallback for anything else that speaks the

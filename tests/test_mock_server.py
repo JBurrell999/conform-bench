@@ -1,18 +1,18 @@
-"""Tests for llm_conform.mock_server: run it for real (bound to an ephemeral
+"""Tests for conform_bench.mock_server: run it for real (bound to an ephemeral
 TCP port) and drive it through the OpenAI-compat and Ollama adapters,
 checking that each `--behavior` preset produces the Outcome it's supposed to
 simulate. These are deliberately simple fixture test cases (no `checks`)
 since the mock server only knows how to be "generically schema-valid," not
-"factually correct" -- see llm_conform/synth.py's docstring.
+"factually correct" -- see conform_bench/synth.py's docstring.
 """
 
 from __future__ import annotations
 
-from llm_conform.engines.ollama import OllamaAdapter
-from llm_conform.engines.openai_compat import OpenAICompatAdapter
-from llm_conform.mock_server import MockEngineServer
-from llm_conform.models import EngineConfig, Outcome, StructuredTestCase, ToolSpec, ToolTestCase
-from llm_conform.validators import validate_structured_response, validate_tool_response
+from conform_bench.engines.ollama import OllamaAdapter
+from conform_bench.engines.openai_compat import OpenAICompatAdapter
+from conform_bench.mock_server import MockEngineServer
+from conform_bench.models import EngineConfig, Outcome, StructuredTestCase, ToolSpec, ToolTestCase
+from conform_bench.validators import validate_structured_response, validate_tool_response
 
 SIMPLE_STRUCTURED = StructuredTestCase(
     id="simple",

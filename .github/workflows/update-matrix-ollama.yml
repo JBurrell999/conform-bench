@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install llm-conform
+      - name: Install conform-bench
         run: pip install -e .
 
       - name: Install Ollama
@@ -58,10 +58,10 @@ jobs:
           EOF
 
       - name: Run conformance suite
-        run: llm-conform run --config engines.ci.yaml --latest
+        run: conform-bench run --config engines.ci.yaml --latest
 
       - name: Update README matrix
-        run: llm-conform report results/*-latest.json --update-readme README.md
+        run: conform-bench report results/*-latest.json --update-readme README.md
 
       - name: Open PR with updated results
         uses: peter-evans/create-pull-request@v6

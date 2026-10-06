@@ -10,12 +10,12 @@ import json
 import httpx
 import pytest
 
-from llm_conform.engines.llamacpp import LlamaCppAdapter
-from llm_conform.engines.ollama import OllamaAdapter
-from llm_conform.engines.openai_compat import OpenAICompatAdapter
-from llm_conform.engines.sglang import SGLangAdapter
-from llm_conform.engines.vllm import VLLMAdapter
-from llm_conform.models import EngineConfig, FieldCheck, Outcome, StructuredTestCase, ToolSpec, ToolTestCase
+from conform_bench.engines.llamacpp import LlamaCppAdapter
+from conform_bench.engines.ollama import OllamaAdapter
+from conform_bench.engines.openai_compat import OpenAICompatAdapter
+from conform_bench.engines.sglang import SGLangAdapter
+from conform_bench.engines.vllm import VLLMAdapter
+from conform_bench.models import EngineConfig, FieldCheck, Outcome, StructuredTestCase, ToolSpec, ToolTestCase
 
 STRUCTURED_TEST = StructuredTestCase(
     id="my_test",

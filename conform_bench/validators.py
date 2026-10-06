@@ -15,7 +15,7 @@ from typing import Any
 
 import jsonschema
 
-from llm_conform.models import FieldCheck, Outcome, RawResponse, StructuredTestCase, ToolTestCase
+from conform_bench.models import FieldCheck, Outcome, RawResponse, StructuredTestCase, ToolTestCase
 
 _FENCE_RE = re.compile(r"^```(?:json)?\s*\n?(.*?)\n?```\s*$", re.DOTALL)
 
