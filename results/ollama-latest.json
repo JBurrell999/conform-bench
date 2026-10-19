@@ -4,8 +4,8 @@
     "engine_type": "ollama",
     "model": "qwen2.5:1.5b",
     "base_url": "http://localhost:11434",
-    "version": "0.35.1",
-    "timestamp": "2026-10-06T00:49:08.613076+00:00",
+    "version": "0.40.6",
+    "timestamp": "2026-10-19T12:54:44.751411+00:00",
     "harness_version": "0.1.0",
     "notes": null
   },
@@ -19,7 +19,7 @@
       "difficulty": "medium",
       "outcome": "pass",
       "reason": "valid JSON conforming to schema",
-      "elapsed_ms": 12334.5,
+      "elapsed_ms": 3699.9,
       "raw_excerpt": "{\n  \"books\": [\n    {\n      \"title\": \"Dune\",\n      \"year\": 1965\n    },\n    {\n      \"title\": \"Neuromancer\",\n      \"year\": 1984\n    }\n  ]\n}"
     },
     {
@@ -31,7 +31,7 @@
       "difficulty": "basic",
       "outcome": "pass",
       "reason": "valid JSON conforming to schema",
-      "elapsed_ms": 101.8,
+      "elapsed_ms": 634.7,
       "raw_excerpt": "{\n  \"status\": \"cancelled\"\n}"
     },
     {
@@ -43,7 +43,7 @@
       "difficulty": "basic",
       "outcome": "pass",
       "reason": "valid JSON conforming to schema",
-      "elapsed_ms": 154.3,
+      "elapsed_ms": 996.2,
       "raw_excerpt": "{\n  \"name\": \"Priya\",\n  \"age\": 29\n}"
     },
     {
@@ -55,7 +55,7 @@
       "difficulty": "medium",
       "outcome": "pass",
       "reason": "valid JSON conforming to schema",
-      "elapsed_ms": 280.9,
+      "elapsed_ms": 1511.3,
       "raw_excerpt": "{\n  \"user\": {\n    \"name\": \"Marcus\",\n    \"address\": {\n      \"city\": \"Lagos\",\n      \"country\": \"Nigeria\"\n    }\n  }\n}"
     },
     {
@@ -67,7 +67,7 @@
       "difficulty": "medium",
       "outcome": "pass",
       "reason": "valid JSON conforming to schema",
-      "elapsed_ms": 149.8,
+      "elapsed_ms": 917.2,
       "raw_excerpt": "{\n  \"name\": \"Alex\",\n  \"middle_name\": null\n}"
     },
     {
@@ -79,7 +79,7 @@
       "difficulty": "basic",
       "outcome": "pass",
       "reason": "valid JSON conforming to schema",
-      "elapsed_ms": 101.4,
+      "elapsed_ms": 653.0,
       "raw_excerpt": "{\n  \"rating\": 5\n}"
     },
     {
@@ -91,7 +91,7 @@
       "difficulty": "advanced",
       "outcome": "pass",
       "reason": "valid JSON conforming to schema",
-      "elapsed_ms": 126.5,
+      "elapsed_ms": 772.2,
       "raw_excerpt": "{\n  \"zip_code\": \"94107\"\n}"
     },
     {
@@ -103,7 +103,7 @@
       "difficulty": "advanced",
       "outcome": "pass",
       "reason": "valid JSON conforming to schema",
-      "elapsed_ms": 288.7,
+      "elapsed_ms": 1530.4,
       "raw_excerpt": "{\n  \"name\": \"Electronics\",\n  \"children\": [\n    {\n      \"name\": \"Laptops\",\n      \"children\": []\n    }\n  ]\n}"
     },
     {
@@ -115,7 +115,7 @@
       "difficulty": "advanced",
       "outcome": "pass",
       "reason": "valid JSON conforming to schema",
-      "elapsed_ms": 193.1,
+      "elapsed_ms": 1326.8,
       "raw_excerpt": "{\n  \"city\": \"Nairobi\",\n  \"population\": 4397073\n}"
     },
     {
@@ -125,9 +125,9 @@
       "test_id": "array_argument",
       "category": "tool_calling",
       "difficulty": "medium",
-      "outcome": "fail",
-      "reason": "expected a tool call but got none; content was: ''",
-      "elapsed_ms": 216.4,
+      "outcome": "pass",
+      "reason": "called expected tool(s) with valid, schema-conforming arguments",
+      "elapsed_ms": 2022.9,
       "raw_excerpt": null
     },
     {
@@ -139,7 +139,7 @@
       "difficulty": "basic",
       "outcome": "pass",
       "reason": "called expected tool(s) with valid, schema-conforming arguments",
-      "elapsed_ms": 193.4,
+      "elapsed_ms": 1614.1,
       "raw_excerpt": null
     },
     {
@@ -150,9 +150,9 @@
       "category": "tool_calling",
       "difficulty": "medium",
       "outcome": "fail",
-      "reason": "expected a tool call but got none; content was: \"That's great! What can I help you with today?\"",
-      "elapsed_ms": 123.0,
-      "raw_excerpt": "That's great! What can I help you with today?"
+      "reason": "expected a tool call but got none; content was: \"That's great! What can I do for you today?\"",
+      "elapsed_ms": 1174.4,
+      "raw_excerpt": "That's great! What can I do for you today?"
     },
     {
       "engine": "ollama",
@@ -163,7 +163,7 @@
       "difficulty": "medium",
       "outcome": "pass",
       "reason": "called expected tool(s) with valid, schema-conforming arguments",
-      "elapsed_ms": 244.6,
+      "elapsed_ms": 2207.7,
       "raw_excerpt": null
     },
     {
@@ -175,7 +175,7 @@
       "difficulty": "medium",
       "outcome": "pass",
       "reason": "called expected tool(s) with valid, schema-conforming arguments",
-      "elapsed_ms": 334.8,
+      "elapsed_ms": 2310.9,
       "raw_excerpt": null
     },
     {
@@ -187,8 +187,8 @@
       "difficulty": "basic",
       "outcome": "pass",
       "reason": "correctly answered without calling a tool",
-      "elapsed_ms": 112.3,
-      "raw_excerpt": "2 + 2 is 4."
+      "elapsed_ms": 896.4,
+      "raw_excerpt": "4"
     },
     {
       "engine": "ollama",
@@ -199,7 +199,7 @@
       "difficulty": "advanced",
       "outcome": "pass",
       "reason": "called expected tool(s) with valid, schema-conforming arguments",
-      "elapsed_ms": 261.6,
+      "elapsed_ms": 1510.5,
       "raw_excerpt": null
     },
     {
@@ -211,7 +211,7 @@
       "difficulty": "basic",
       "outcome": "pass",
       "reason": "called expected tool(s) with valid, schema-conforming arguments",
-      "elapsed_ms": 213.2,
+      "elapsed_ms": 1649.9,
       "raw_excerpt": null
     }
   ]
