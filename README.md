@@ -20,7 +20,7 @@ reproducible test and a line in a table.
 | Engine | Version | Model | Structured Output | Tool Calling | Tested |
 |---|---|---|---|---|---|
 | **llama.cpp** | b11429-d81235049 | `Qwen2.5-1.5B-Instruct-GGUF` | 9/9 (100%) | 6/8 (75%) | 2026-10-06 |
-| **ollama** | 0.35.1 | `qwen2.5:1.5b` | 9/9 (100%) | 6/8 (75%) | 2026-10-06 |
+| **ollama** | 0.40.11 | `qwen2.5:1.5b` | 9/9 (100%) | 7/8 (88%) | 2026-10-26 |
 
 ### Structured output (JSON-schema-constrained generation)
 
@@ -40,7 +40,7 @@ reproducible test and a line in a table.
 
 | Test | llama.cpp | ollama |
 |---|---|---|
-| `array_argument` (Tool parameter is an array of strings) | ✅ | ❌ |
+| `array_argument` (Tool parameter is an array of strings) | ✅ | ✅ |
 | `enum_argument` (Tool parameter constrained to an enum; checks the model selects the exact matching value) | ❌ | ✅ |
 | `forced_tool_choice` (tool_choice forces a specific named tool even though the prompt alone wouldn't obviously call for it. Native APIs without a tool_choice equivalent (e.g. Ollama) are expected to fail this one -- that's a real, reportable gap, not a harness bug.) | ❌ | ❌ |
 | `multi_tool_selection` (Two similarly-named tools available; the model must pick the correct one) | ✅ | ✅ |
@@ -63,10 +63,9 @@ reproducible test and a line in a table.
 </details>
 
 <details>
-<summary>ollama: 2 non-passing test(s)</summary>
+<summary>ollama: 1 non-passing test(s)</summary>
 
-- `array_argument` (tool_calling): **fail** -- expected a tool call but got none; content was: ''
-- `forced_tool_choice` (tool_calling): **fail** -- expected a tool call but got none; content was: "That's great! What can I help you with today?"
+- `forced_tool_choice` (tool_calling): **fail** -- expected a tool call but got none; content was: "That's great! What can I do for you today?"
 
 </details>
 
