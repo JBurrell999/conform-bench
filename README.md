@@ -20,7 +20,7 @@ reproducible test and a line in a table.
 | Engine | Version | Model | Structured Output | Tool Calling | Tested |
 |---|---|---|---|---|---|
 | **llama.cpp** | b11429-d81235049 | `Qwen2.5-1.5B-Instruct-GGUF` | 9/9 (100%) | 6/8 (75%) | 2026-10-06 |
-| **ollama** | 0.35.1 | `qwen2.5:1.5b` | 9/9 (100%) | 6/8 (75%) | 2026-10-06 |
+| **ollama** | 0.40.15 | `qwen2.5:1.5b` | 9/9 (100%) | 6/8 (75%) | 2026-11-09 |
 
 ### Structured output (JSON-schema-constrained generation)
 
@@ -40,14 +40,14 @@ reproducible test and a line in a table.
 
 | Test | llama.cpp | ollama |
 |---|---|---|
-| `array_argument` (Tool parameter is an array of strings) | ✅ | ❌ |
+| `array_argument` (Tool parameter is an array of strings) | ✅ | ✅ |
 | `enum_argument` (Tool parameter constrained to an enum; checks the model selects the exact matching value) | ❌ | ✅ |
 | `forced_tool_choice` (tool_choice forces a specific named tool even though the prompt alone wouldn't obviously call for it. Native APIs without a tool_choice equivalent (e.g. Ollama) are expected to fail this one -- that's a real, reportable gap, not a harness bug.) | ❌ | ❌ |
 | `multi_tool_selection` (Two similarly-named tools available; the model must pick the correct one) | ✅ | ✅ |
 | `nested_object_argument` (Tool parameter is itself an object with sub-fields) | ✅ | ✅ |
 | `no_tool_needed` (Prompt doesn't need any tool; the model should just answer directly) | ✅ | ✅ |
 | `parallel_tool_calls` (Prompt naturally needs the same tool called twice with different arguments in one turn. Parallel/multiple tool calls are a feature that varies a lot across engines and server flags.) | ✅ | ✅ |
-| `single_tool_basic` (One tool available, prompt clearly needs it; checks correct name and arguments) | ✅ | ✅ |
+| `single_tool_basic` (One tool available, prompt clearly needs it; checks correct name and arguments) | ✅ | ❌ |
 
 **Legend:** ✅ pass &nbsp;·&nbsp; ❌ fail (ran, output didn't conform) &nbsp;·&nbsp; ⚠️ error (request/transport failure) &nbsp;·&nbsp; ➖ unsupported (engine rejected the request, e.g. HTTP 400) &nbsp;·&nbsp; ⏱️ timeout &nbsp;·&nbsp; *(blank)* not run
 
@@ -65,8 +65,8 @@ reproducible test and a line in a table.
 <details>
 <summary>ollama: 2 non-passing test(s)</summary>
 
-- `array_argument` (tool_calling): **fail** -- expected a tool call but got none; content was: ''
 - `forced_tool_choice` (tool_calling): **fail** -- expected a tool call but got none; content was: "That's great! What can I help you with today?"
+- `single_tool_basic` (tool_calling): **fail** -- arguments for tool 'get_weather' do not conform to its parameter schema: {'enum': ['celsius'], 'type': 'string'} is not of type 'string'
 
 </details>
 
